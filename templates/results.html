@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Kill Tracker Results</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <h1>Kill Tracker Results</h1>
+    <p>Kills Achieved: {{ .KillsAchieved }}</p>
+    <p>Time Taken: {{ .TimeTaken }}</p>
+    <p>Average Time per Kill: {{ .AverageTimePerKill }}</p>
+
+    <form id="additionalKillsForm">
+      <label for="additionalKills">Enter additional kills:</label>
+      <input
+        type="number"
+        id="additionalKills"
+        name="additionalKills"
+        required
+      />
+      <button type="button" onclick="calculateAdditionalTime()">
+        Calculate
+      </button>
+    </form>
+
+    <p id="additionalTimeResult"></p>
+
+    <a href="/">Back to Tracker</a>
+
+    <script>
+      // TODO: move inside scripts.js?
+      const averageTimePerKill = JSON.parse("{{ .AverageTimePerKillRaw }}");
+
+      function calculateAdditionalTime() {
+        const additionalKills =
+          document.getElementById("additionalKills").value;
+        if (additionalKills !== "") {
+          const additionalTime = additionalKills * averageTimePerKill;
+          document.getElementById(
+            "additionalTimeResult"
+          ).innerText = `Time to achieve ${additionalKills} more kills: ${formatDuration(
+            additionalTime
+          )}`;
+        }
+      }
+
+      function formatDuration(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${hours}h ${minutes}m ${remainingSeconds}s`;
+      }
+    </script>
+  </body>
+</html>
