@@ -1,1 +1,1 @@
-web: go run main.go
+web: ./osrs-kill-tracker.exe
