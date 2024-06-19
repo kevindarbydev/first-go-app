@@ -1,1 +1,1 @@
-web: ./osrs-kill-tracker
+web: osrs-kill-tracker
