@@ -1,1 +1,1 @@
-web: ./bin/kill-tracker
+web: go run main.go
