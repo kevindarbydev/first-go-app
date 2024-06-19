@@ -2,6 +2,7 @@ package main
 
 import (
     "net/http"
+    "os"
     "strconv"
     "time"
 
@@ -32,7 +33,14 @@ func main() {
         })
     })
 
-    r.Run(":8080") // Start the server on port 8080
+    // Get the PORT from the environment variable
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+    }
+
+    // Start the server on the specified port
+    r.Run(":" + port)
 }
 
 // Helper function to format duration in a more readable form
