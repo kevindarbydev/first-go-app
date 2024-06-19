@@ -1,1 +1,1 @@
-web: ./osrs-kill-tracker.exe
+web: ./osrs-kill-tracker
